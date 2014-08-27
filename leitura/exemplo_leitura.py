@@ -1,3 +1,8 @@
+"""
+log of commands deployed during class in ipython
+
+it will not work as a script
+"""
 # opening file the python way
 myfile = open('hora_altair.txt','r')
 myfile
@@ -11,12 +16,13 @@ for line in lines:
 for line in lines:
     print line
     sline = line.split()
-    hour = sline[0]
-    min = sline[1]
-    sec = sline[2]
+    hour = int(sline[0])
+    min = int(sline[1])
+    sec = int(sline[2])
     print hour, min, sec
     ang = hour + min/60. + sec/3600.
     print ang
+# above we find an error if you do not "int" the variables
 
 from numpy import *
 # now reading it the numpy way
@@ -32,7 +38,7 @@ TA = transpose(A)
 TA
 TA[0]
 # comparing to original file
-cat hora_altair.txt
+#cat hora_altair.txt
 # making the calculation
 ANG = TA[0]+TA[1]/60.+TA[2]/3600.
 ANG
@@ -48,8 +54,8 @@ ANG
 # now let us save the results the python way
 fileout = open('hora_altair.out','w')
 # a test, it did not work as it is not a string
-for ang in ANG:
-    fileout.write(ang)
+#for ang in ANG:
+    #fileout.write(ang)
 # one way to write as string (we will see that not very nice, since there is no 
 # newline on the format
 for ang in ANG:
@@ -57,22 +63,22 @@ for ang in ANG:
 # you need to close the file
 fileout.close()
 # displaying the ouput, everything is on a single line
-cat hora_altair.out
+#cat hora_altair.out
 # let us fix it
 fileout = open('hora_altair.out','w')
 # using format to print as we want it. note the \n for newline
 for ang in ANG:
     fileout.write("%f\n"%ang)
 fileout.close()
-cat hora_altair.out
+#cat hora_altair.out
 
 # now let us save it the numpy way
 savetxt('hora_altair.outnp',ANG)
 # voila, just a line and very fast
-cat hora_altair.outnp
+#cat hora_altair.outnp
 # we can elaborate on the savetxt and work the format, for instance
 savetxt('hora_altair.outnp',ANG, fmt='%.5f')
-cat hora_altair.outnp
+#cat hora_altair.outnp
 
 # playing with OS commands
 import os
@@ -140,18 +146,9 @@ xx = arange(1000000)
 xx
 xx.shape
 # fast results and coding
-xx[(xx>100)*(x<150)]
-xx
 xx[(xx>100)*(xx<150)]
 xx[(xx>100)*(xx<1500)]
 xx[(xx>100.)*(xx<1500.)]
-xx[(xx>100.)*(xx<1500.)]*xx
-
-# very resourceful
-# generate random numbers following a gaussian distribution
-x = randn(100000)
-y = randn(100000)
-# plotting as a heat map
-hexbin(x,y)
-show()
+# a test to show that operations must work on arrays with the same shape
+#xx[(xx>100.)*(xx<1500.)]*xx
 
